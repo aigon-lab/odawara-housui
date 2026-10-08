@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>炭火割烹 芳翠（ほうすい） | 小田原の旬を味わう和食処</title>
+  <style>
+    :root {
+      /* いまどきの上品な和モダン・ラグジュアリー配色 */
+      --primary-gold: #d97706; /* 落ち着いた琥珀ゴールド */
+      --accent-call: linear-gradient(135deg, #1e293b, #0f172a); /* 洗練された漆黒 */
+      --accent-gold-btn: linear-gradient(135deg, #d97706, #b45309); /* 黄金ボタン */
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+      --bg-base: #f1f5f9;
+      --card-bg: #ffffff;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+    .container {
+      max-width: 440px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      min-height: 100vh;
+      box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    }
+
+    /* ① ヘッダー：写真がドーンと入るヒーロービュー */
+    .hero-header {
+      position: relative;
+      height: 260px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%),
+                  url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px 20px;
+      color: #ffffff;
+    }
+    .hero-badge {
+      align-self: flex-start;
+      background: rgba(217, 119, 6, 0.9);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .hero-title {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      margin-bottom: 4px;
+    }
+    .hero-catch {
+      font-size: 13px;
+      color: #e2e8f0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    /* ② アクションボタン */
+    .action-bar {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+      padding: 16px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .btn-act {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: all 0.2s;
+    }
+    /* 電話ボタン */
+    .btn-call {
+      background: var(--accent-call);
+      color: #ffffff;
+      border: 1px solid #334155;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+    }
+    .btn-call span.icon { color: #f59e0b; font-size: 16px; }
+
+    /* 地図ボタン */
+    .btn-map {
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-map span.icon { color: #ef4444; font-size: 16px; }
+
+    /* セクション共通 */
+    .section {
+      padding: 24px 20px;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .sec-mark {
+      width: 4px;
+      height: 18px;
+      background: var(--primary-gold);
+      border-radius: 2px;
+    }
+    .sec-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    /* こだわり */
+    .about-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+    .about-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .about-body {
+      padding: 16px;
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    /* おすすめメニュー */
+    .menu-card {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .menu-card:last-child { border-bottom: none; }
+    .menu-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #e2e8f0;
+    }
+    .menu-info { flex: 1; }
+    .menu-name { font-size: 15px; font-weight: 800; color: #1e293b; margin-bottom: 2px; }
+    .menu-desc { font-size: 12px; color: var(--text-sub); line-height: 1.4; margin-bottom: 4px; }
+    .menu-price { font-size: 16px; font-weight: 900; color: #b45309; }
+
+    /* 店舗情報 */
+    .info-list {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+    }
+    .info-row {
+      display: flex;
+      font-size: 13px;
+      padding: 8px 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-lbl { width: 80px; color: var(--text-sub); font-weight: 700; flex-shrink: 0; }
+    .info-val { color: var(--text-main); font-weight: 500; }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-sub);
+      padding: 24px 20px;
+      background: #f8fafc;
+    }
+
+    /* 下部固定ボタン */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+    }
+    .sticky-btn {
+      width: 100%;
+      max-width: 400px;
+      background: var(--accent-gold-btn);
+      color: #ffffff;
+      text-align: center;
+      padding: 14px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(217, 119, 6, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ① ヘッダー看板 -->
+  <header class="hero-header">
+    <span class="hero-badge">小田原・箱根口</span>
+    <h1 class="hero-title">炭火割烹 芳翠</h1>
+    <p class="hero-catch">相模湾の地魚と厳選和牛を、極上の炭火焼きで</p>
+  </header>
+
+  <!-- ② アクションボタン（090-3988-9970 へ直接発信） -->
+  <div class="action-bar">
+    <a href="tel:09039889970" class="btn-act btn-call">
+      <span class="icon">📞</span>
+      <span>090-3988-9970</span>
+    </a>
+    <a href="https://maps.google.com" target="_blank" class="btn-act btn-map">
+      <span class="icon">📍</span>
+      <span>道案内・地図</span>
+    </a>
+  </div>
+
+  <!-- ③ お店のこだわり -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-mark"></div>
+      <h2 class="sec-title">当店のこだわり</h2>
+    </div>
+    <div class="about-card">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="店主のこだわり" class="about-img">
+      <div class="about-body">
+        毎朝、小田原早川港から仕入れる新鮮な地魚と、職人が一本一本丁寧に仕込む炭火焼き。気取らず、心温まる手料理をご提供いたします。お一人様からご家族連れまで、どうぞごゆっくりお過ごしください。
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ おすすめメニュー -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-mark"></div>
+      <h2 class="sec-title">おすすめメニュー</h2>
+    </div>
+    
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=200&q=80" alt="お刺身" class="menu-thumb">
+      <div class="menu-info">
+        <div class="menu-name">特選 地魚のお刺身盛り合わせ</div>
+        <div class="menu-desc">早川港直送、本日一番の鮮魚を贅沢に</div>
+        <div class="menu-price">1,880円 <span style="font-size:11px; color:#64748b; font-weight:normal;">(税込)</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80" alt="和牛タタキ" class="menu-thumb">
+      <div class="menu-info">
+        <div class="menu-name">A5黒毛和牛 藁焼きタタキ</div>
+        <div class="menu-desc">豪快な藁火で炙る、当店不動の看板名物</div>
+        <div class="menu-price">2,280円 <span style="font-size:11px; color:#64748b; font-weight:normal;">(税込)</span></div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=200&q=80" alt="釜飯" class="menu-thumb">
+      <div class="menu-info">
+        <div class="menu-name">日替わり 季節の釜飯</div>
+        <div class="menu-desc">炊き立て熱々、出汁の香りが広がります</div>
+        <div class="menu-price">1,200円 <span style="font-size:11px; color:#64748b; font-weight:normal;">(税込)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 店舗情報（電話番号反映） -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-mark"></div>
+      <h2 class="sec-title">店舗情報・アクセス</h2>
+    </div>
+    <div class="info-list">
+      <div class="info-row">
+        <div class="info-lbl">店名</div>
+        <div class="info-val">炭火割烹 芳翠（ほうすい）</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">住所</div>
+        <div class="info-val">神奈川県小田原市本町1-2-3<br><span style="font-size:11px; color:#64748b;">（小田原駅東口より徒歩7分）</span></div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">電話番号</div>
+        <div class="info-val"><a href="tel:09039889970" style="color:#0f172a; text-decoration:none; font-weight:700;">090-3988-9970</a></div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">営業時間</div>
+        <div class="info-val">昼 11:30〜14:00<br>夜 17:00〜22:00 (L.O. 21:30)</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">定休日</div>
+        <div class="info-val">毎週火曜日・第3水曜日</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">駐車場</div>
+        <div class="info-val">店舗裏に2台あり（近隣コインP提携あり）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <p>© 炭火割烹 芳翠 All Rights Reserved.</p>
+    <p style="margin-top:4px; font-size:10px; color:#94a3b8;">Supported by AIGON.LAB</p>
+  </footer>
+
+</div>
+
+<!-- ⑥ 下部固定ボタン（090-3988-9970 へ直接発信） -->
+<div class="sticky-bar">
+  <a href="tel:09039889970" class="sticky-btn">
+    <span>📞</span>
+    <span>お電話はこちら（090-3988-9970）</span>
+  </a>
+</div>
+
+</body>
+</html>
